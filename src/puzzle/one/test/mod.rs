@@ -2,7 +2,7 @@
 use super::*;
 use crate::input::read_contents;
 
-const TEST_INPUTS: &str = "1000
+const TEST_INPUT: &str = "1000
 2000
 3000
 
@@ -19,10 +19,10 @@ const TEST_INPUTS: &str = "1000
 
 #[test]
 fn test_solve_part_one() {
-    assert_eq!(String::from("24000"), solve_part_one(TEST_INPUTS));
+    assert_eq!(String::from("24000"), solve_part_one(TEST_INPUT));
 }
 
 #[test]
 fn test_solve_part_two() {
-    assert_eq!(String::from("45000"), solve_part_two(TEST_INPUTS));
+    assert_eq!(String::from("45000"), solve_part_two(TEST_INPUT));
 }
