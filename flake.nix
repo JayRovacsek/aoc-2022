@@ -87,7 +87,7 @@
             (import ./pre-commit-checks.nix { inherit self; });
         };
 
-        stableDeps = with pkgs; [ nixfmt pre-commit ];
+        stableDeps = with pkgs; [ nixfmt pre-commit rustfmt ];
 
         devShell = rustPkgs.workspaceShell {
           name = "rust-dev-shell";
