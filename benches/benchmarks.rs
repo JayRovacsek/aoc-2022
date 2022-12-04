@@ -23,6 +23,13 @@ fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("day 3, part 2", |b| {
         b.iter(|| three::solve_part_two(black_box(&read_contents("./inputs/day3.txt"))))
     });
+
+    c.bench_function("day 4, part 1", |b| {
+        b.iter(|| three::solve_part_one(black_box(&read_contents("./inputs/day4.txt"))))
+    });
+    c.bench_function("day 4, part 2", |b| {
+        b.iter(|| three::solve_part_two(black_box(&read_contents("./inputs/day4.txt"))))
+    });
 }
 
 criterion_group!(benches, criterion_benchmark);
