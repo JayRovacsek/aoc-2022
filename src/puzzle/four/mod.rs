@@ -15,35 +15,21 @@ pub fn solve(input: &str) {
 
 #[derive(Debug)]
 struct CleaningCrew {
-    first: Vec<u32>,
-    first_hash: HashSet<u32>,
-    second: Vec<u32>,
-    second_hash: HashSet<u32>,
-}
-
-fn contains_range(target: &Vec<u32>, start: &u32, end: &u32) -> bool {
-    target.contains(start) && target.contains(end)
+    first: HashSet<u32>,
+    second: HashSet<u32>,
 }
 
 impl CleaningCrew {
     fn has_redundancy(&self) -> bool {
         match (self.first.len() > self.second.len()) {
-            true => contains_range(
-                &self.first,
-                self.second.first().unwrap(),
-                self.second.last().unwrap(),
-            ),
-            false => contains_range(
-                &self.second,
-                self.first.first().unwrap(),
-                self.first.last().unwrap(),
-            ),
+            true => self.first.is_superset(&self.second),
+            false => self.second.is_superset(&self.first),
         }
     }
 
     fn has_overlap(&self) -> bool {
-        self.first_hash
-            .intersection(&self.second_hash)
+        self.first
+            .intersection(&self.second)
             .collect::<Vec<&u32>>()
             .len()
             != 0
@@ -71,7 +57,7 @@ impl From<&str> for CleaningCrew {
                 .unwrap_or(&"0")
                 .parse::<u32>()
                 .unwrap_or(0_u32))
-            .collect::<Vec<u32>>();
+            .collect::<HashSet<u32>>();
 
         let second = (second_segments
             .first()
@@ -84,17 +70,9 @@ impl From<&str> for CleaningCrew {
                 .unwrap_or(&"0")
                 .parse::<u32>()
                 .unwrap_or(0_u32))
-            .collect::<Vec<u32>>();
+            .collect::<HashSet<u32>>();
 
-        let first_hash = first.iter().map(|x| *x).collect::<HashSet<u32>>();
-        let second_hash = second.iter().map(|x| *x).collect::<HashSet<u32>>();
-
-        CleaningCrew {
-            first,
-            second,
-            first_hash,
-            second_hash,
-        }
+        CleaningCrew { first, second }
     }
 }
 
