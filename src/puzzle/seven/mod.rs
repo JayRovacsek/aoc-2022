@@ -53,7 +53,6 @@ impl Inode {
 
     fn parse_recursive(input: Vec<Vec<String>>, name: String) -> Vec<Inode> {
         let re = Regex::new(r"^(dir|\d)").unwrap();
-        let dir = Regex::new(r"^dir ").unwrap();
         let file = Regex::new(r"^\d").unwrap();
 
         input
